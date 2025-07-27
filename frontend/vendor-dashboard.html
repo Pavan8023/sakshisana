@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - StreetSustain</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0a192f',
+                        secondary: '#64ffda',
+                        accent: '#ff6b6b',
+                        dark: '#020c1b',
+                        light: '#ccd6f6',
+                        'primary-light': '#112240'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .order-status {
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: inline-block;
+        }
+        
+        .status-delivered {
+            background-color: rgba(100, 255, 218, 0.1);
+            color: #64ffda;
+        }
+        
+        .status-pending {
+            background-color: rgba(255, 107, 107, 0.1);
+            color: #ff6b6b;
+        }
+        
+        .status-processing {
+            background-color: rgba(255, 184, 77, 0.1);
+            color: #ffb84d;
+        }
+        
+        .chart-container {
+            position: relative;
+            height: 200px;
+            width: 100%;
+        }
+        
+        .stat-card {
+            transition: all 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .inventory-bar {
+            height: 6px;
+            border-radius: 3px;
+            background: #e5e7eb;
+            overflow: hidden;
+        }
+        
+        .inventory-fill {
+            height: 100%;
+        }
+        
+        .inventory-good {
+            background: #10b981;
+        }
+        
+        .inventory-medium {
+            background: #f59e0b;
+        }
+        
+        .inventory-low {
+            background: #ef4444;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-primary to-primary-light text-white p-4 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center">
+                <i class="fas fa-utensils text-2xl text-accent mr-3"></i>
+                <h1 class="text-2xl font-bold">Street<span class="text-secondary">Sustain</span></h1>
+            </div>
+            <div class="flex items-center space-x-6">
+                <div class="relative group">
+                    <i class="fas fa-bell text-xl cursor-pointer"></i>
+                    <span class="absolute -top-1 -right-1 bg-accent text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">3</span>
+                    <div class="absolute right-0 mt-2 w-80 bg-white shadow-xl rounded-lg p-4 hidden group-hover:block z-10">
+                        <h3 class="font-bold text-primary mb-2">Notifications</h3>
+                        <ul>
+                            <li class="py-2 border-b">
+                                <div class="flex">
+                                    <div class="w-8 h-8 rounded-full bg-secondary/20 flex items-center justify-center mr-3">
+                                        <i class="fas fa-truck text-secondary"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-medium">Order #SS-2023-0456 has been shipped</p>
+                                        <p class="text-xs text-gray-500">10 minutes ago</p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="py-2 border-b">
+                                <div class="flex">
+                                    <div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center mr-3">
+                                        <i class="fas fa-check text-green-600"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-medium">Payment received for Order #SS-2023-0452</p>
+                                        <p class="text-xs text-gray-500">2 hours ago</p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="py-2">
+                                <div class="flex">
+                                    <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center mr-3">
+                                        <i class="fas fa-user-plus text-blue-600"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-medium">New supplier registered: Fresh Farm Produce</p>
+                                        <p class="text-xs text-gray-500">5 hours ago</p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-2 cursor-pointer group">
+                    <div class="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center">
+                        <i class="fas fa-user text-secondary"></i>
+                    </div>
+                    <span>Rajesh Kumar</span>
+                    <div class="absolute mt-40 right-4 w-48 bg-white shadow-lg rounded-lg overflow-hidden hidden group-hover:block z-10">
+                        <div class="p-4 border-b">
+                            <p class="font-medium">Rajesh Kumar</p>
+                            <p class="text-sm text-gray-600">rajesh@streetsustain.in</p>
+                        </div>
+                        <ul>
+                            <li class="hover:bg-gray-100 py-2 px-4"><i class="fas fa-user mr-2 text-gray-600"></i> Profile</li>
+                            <li class="hover:bg-gray-100 py-2 px-4"><i class="fas fa-cog mr-2 text-gray-600"></i> Settings</li>
+                            <li class="hover:bg-gray-100 py-2 px-4"><i class="fas fa-question-circle mr-2 text-gray-600"></i> Help</li>
+                        </ul>
+                        <button id="logoutBtn" class="w-full text-left hover:bg-gray-100 py-2 px-4 text-red-600">
+                            <i class="fas fa-sign-out-alt mr-2"></i> Logout
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="container mx-auto p-4">
+        <!-- Dashboard Header -->
+        <div class="mb-8 flex justify-between items-center">
+            <div>
+                <h1 class="text-3xl font-bold text-primary">Dashboard</h1>
+                <p class="text-gray-600">Welcome back, Rajesh! Here's your business overview</p>
+            </div>
+            <div>
+                <span class="bg-secondary/10 text-secondary px-3 py-1 rounded-full text-sm">Vendor Account</span>
+            </div>
+        </div>
+        
+        <!-- Stats Cards -->
+        <div class="dashboard-grid mb-8">
+            <div class="stat-card bg-white rounded-xl shadow p-6">
+                <div class="flex items-center">
+                    <div class="p-3 bg-green-100 rounded-lg mr-4">
+                        <i class="fas fa-rupee-sign text-green-600 text-2xl"></i>
+                    </div>
+                    <div>
+                        <p class="text-gray-600">Today's Revenue</p>
+                        <h3 class="text-2xl font-bold text-gray-800">₹8,560</h3>
+                    </div>
+                </div>
+                <div class="mt-4 pt-4 border-t border-gray-100">
+                    <p class="text-green-600 flex items-center">
+                        <i class="fas fa-arrow-up mr-1"></i> 12.5% from yesterday
+                    </p>
+                </div>
+            </div>
+            
+            <div class="stat-card bg-white rounded-xl shadow p-6">
+                <div class="flex items-center">
+                    <div class="p-3 bg-blue-100 rounded-lg mr-4">
+                        <i class="fas fa-shopping-cart text-blue-600 text-2xl"></i>
+                    </div>
+                    <div>
+                        <p class="text-gray-600">Total Orders</p>
+                        <h3 class="text-2xl font-bold text-gray-800">42</h3>
+                    </div>
+                </div>
+                <div class="mt-4 pt-4 border-t border-gray-100">
+                    <p class="text-green-600 flex items-center">
+                        <i class="fas fa-arrow-up mr-1"></i> 3 new orders today
+                    </p>
+                </div>
+            </div>
+            
+            <div class="stat-card bg-white rounded-xl shadow p-6">
+                <div class="flex items-center">
+                    <div class="p-3 bg-purple-100 rounded-lg mr-4">
+                        <i class="fas fa-users text-purple-600 text-2xl"></i>
+                    </div>
+                    <div>
+                        <p class="text-gray-600">New Customers</p>
+                        <h3 class="text-2xl font-bold text-gray-800">18</h3>
+                    </div>
+                </div>
+                <div class="mt-4 pt-4 border-t border-gray-100">
+                    <p class="text-green-600 flex items-center">
+                        <i class="fas fa-arrow-up mr-1"></i> 5.2% from last week
+                    </p>
+                </div>
+            </div>
+            
+            <div class="stat-card bg-white rounded-xl shadow p-6">
+                <div class="flex items-center">
+                    <div class="p-3 bg-yellow-100 rounded-lg mr-4">
+                        <i class="fas fa-percentage text-yellow-600 text-2xl"></i>
+                    </div>
+                    <div>
+                        <p class="text-gray-600">Order Completion</p>
+                        <h3 class="text-2xl font-bold text-gray-800">96%</h3>
+                    </div>
+                </div>
+                <div class="mt-4 pt-4 border-t border-gray-100">
+                    <p class="text-green-600 flex items-center">
+                        <i class="fas fa-check-circle mr-1"></i> On track
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Charts and Tables Section -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+            <!-- Revenue Chart -->
+            <div class="bg-white rounded-xl shadow p-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-xl font-bold text-gray-800">Revenue Overview</h2>
+                    <select class="border border-gray-300 rounded-lg px-3 py-1">
+                        <option>Last 7 Days</option>
+                        <option>Last 30 Days</option>
+                        <option>Last 90 Days</option>
+                    </select>
+                </div>
+                <div class="chart-container">
+                    <canvas id="revenueChart"></canvas>
+                </div>
+            </div>
+            
+            <!-- Recent Orders -->
+            <div class="bg-white rounded-xl shadow p-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-xl font-bold text-gray-800">Recent Orders</h2>
+                    <a href="#" class="text-secondary font-medium">View All</a>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead>
+                            <tr class="text-left text-gray-600 border-b">
+                                <th class="pb-3">Order ID</th>
+                                <th class="pb-3">Customer</th>
+                                <th class="pb-3">Amount</th>
+                                <th class="pb-3">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b hover:bg-gray-50">
+                                <td class="py-3">#SS-2023-0452</td>
+                                <td class="py-3">Rahul Sharma</td>
+                                <td class="py-3">₹1,240</td>
+                                <td class="py-3">
+                                    <span class="order-status status-delivered">Delivered</span>
+                                </td>
+                            </tr>
+                            <tr class="border-b hover:bg-gray-50">
+                                <td class="py-3">#SS-2023-0453</td>
+                                <td class="py-3">Priya Patel</td>
+                                <td class="py-3">₹850</td>
+                                <td class="py-3">
+                                    <span class="order-status status-processing">Processing</span>
+                                </td>
+                            </tr>
+                            <tr class="border-b hover:bg-gray-50">
+                                <td class="py-3">#SS-2023-0454</td>
+                                <td class="py-3">Vikram Singh</td>
+                                <td class="py-3">₹2,150</td>
+                                <td class="py-3">
+                                    <span class="order-status status-pending">Pending</span>
+                                </td>
+                            </tr>
+                            <tr class="border-b hover:bg-gray-50">
+                                <td class="py-3">#SS-2023-0455</td>
+                                <td class="py-3">Anjali Mehta</td>
+                                <td class="py-3">₹980</td>
+                                <td class="py-3">
+                                    <span class="order-status status-delivered">Delivered</span>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="py-3">#SS-2023-0456</td>
+                                <td class="py-3">Sanjay Verma</td>
+                                <td class="py-3">₹1,560</td>
+                                <td class="py-3">
+                                    <span class="order-status status-processing">Processing</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Inventory Section -->
+        <div class="bg-white rounded-xl shadow p-6 mb-8">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-xl font-bold text-gray-800">Inventory Summary</h2>
+                <a href="#" class="text-secondary font-medium">Manage Inventory</a>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="border border-gray-200 rounded-lg p-4 hover:shadow-md transition">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="font-medium text-gray-800">Fresh Vegetables</h3>
+                            <p class="text-gray-600 text-sm">Stock: 125 kg</p>
+                        </div>
+                        <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
+                            <i class="fas fa-leaf text-green-600"></i>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <div class="inventory-bar">
+                            <div class="inventory-fill inventory-good" style="width: 75%"></div>
+                        </div>
+                        <p class="text-xs text-gray-600 mt-1">Good stock level</p>
+                    </div>
+                </div>
+                
+                <div class="border border-gray-200 rounded-lg p-4 hover:shadow-md transition">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="font-medium text-gray-800">Paneer</h3>
+                            <p class="text-gray-600 text-sm">Stock: 8 kg</p>
+                        </div>
+                        <div class="w-10 h-10 rounded-full bg-yellow-100 flex items-center justify-center">
+                            <i class="fas fa-cheese text-yellow-600"></i>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <div class="inventory-bar">
+                            <div class="inventory-fill inventory-medium" style="width: 30%"></div>
+                        </div>
+                        <p class="text-xs text-gray-600 mt-1">Reorder needed</p>
+                    </div>
+                </div>
+                
+                <div class="border border-gray-200 rounded-lg p-4 hover:shadow-md transition">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="font-medium text-gray-800">Spices</h3>
+                            <p class="text-gray-600 text-sm">Stock: 42 packets</p>
+                        </div>
+                        <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
+                            <i class="fas fa-mortar-pestle text-green-600"></i>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <div class="inventory-bar">
+                            <div class="inventory-fill inventory-good" style="width: 65%"></div>
+                        </div>
+                        <p class="text-xs text-gray-600 mt-1">Adequate stock</p>
+                    </div>
+                </div>
+                
+                <div class="border border-gray-200 rounded-lg p-4 hover:shadow-md transition">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="font-medium text-gray-800">Cooking Oil</h3>
+                            <p class="text-gray-600 text-sm">Stock: 56 liters</p>
+                        </div>
+                        <div class="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center">
+                            <i class="fas fa-oil-can text-red-600"></i>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <div class="inventory-bar">
+                            <div class="inventory-fill inventory-low" style="width: 25%"></div>
+                        </div>
+                        <p class="text-xs text-gray-600 mt-1">Low stock - order now</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Quick Actions -->
+        <div class="bg-gradient-to-r from-primary to-primary-light rounded-xl p-6 text-white">
+            <h2 class="text-xl font-bold mb-4">Quick Actions</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <button class="bg-secondary/20 hover:bg-secondary/30 text-white py-3 rounded-lg flex flex-col items-center transition">
+                    <i class="fas fa-plus-circle text-2xl mb-2"></i>
+                    <span>New Order</span>
+                </button>
+                <button class="bg-secondary/20 hover:bg-secondary/30 text-white py-3 rounded-lg flex flex-col items-center transition">
+                    <i class="fas fa-truck text-2xl mb-2"></i>
+                    <span>Track Delivery</span>
+                </button>
+                <button class="bg-secondary/20 hover:bg-secondary/30 text-white py-3 rounded-lg flex flex-col items-center transition">
+                    <i class="fas fa-file-invoice text-2xl mb-2"></i>
+                    <span>Generate Invoice</span>
+                </button>
+                <button class="bg-secondary/20 hover:bg-secondary/30 text-white py-3 rounded-lg flex flex-col items-center transition">
+                    <i class="fas fa-chart-line text-2xl mb-2"></i>
+                    <span>View Reports</span>
+                </button>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="bg-primary text-white py-6 mt-8">
+        <div class="container mx-auto text-center">
+            <p>© 2023 StreetSustain. All rights reserved.</p>
+            <p class="text-light/60 mt-2">Empowering street food vendors with transparent sourcing solutions</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize charts
+            initCharts();
+            
+            // Logout functionality
+            const logoutBtn = document.getElementById('logoutBtn');
+            logoutBtn.addEventListener('click', function() {
+                localStorage.removeItem('isLoggedIn');
+                window.location.href = 'login.html';
+            });
+            
+            // Initialize Revenue Chart
+            function initCharts() {
+                // Revenue Chart
+                const revenueCtx = document.getElementById('revenueChart').getContext('2d');
+                const revenueChart = new Chart(revenueCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                        datasets: [{
+                            label: 'Daily Revenue (₹)',
+                            data: [6500, 7200, 8100, 7800, 8560, 9200, 10500],
+                            borderColor: '#64ffda',
+                            backgroundColor: 'rgba(100, 255, 218, 0.1)',
+                            borderWidth: 3,
+                            pointBackgroundColor: '#64ffda',
+                            pointRadius: 5,
+                            tension: 0.3,
+                            fill: true
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                grid: {
+                                    color: 'rgba(0, 0, 0, 0.05)'
+                                },
+                                ticks: {
+                                    callback: function(value) {
+                                        return '₹' + value;
+                                    }
+                                }
+                            },
+                            x: {
+                                grid: {
+                                    display: false
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
