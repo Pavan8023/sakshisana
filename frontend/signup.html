@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StreetSustain - Sign Up</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0a192f',
+                        secondary: '#64ffda',
+                        accent: '#ff6b6b',
+                        dark: '#020c1b',
+                        light: '#ccd6f6'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        :root {
+            --navy: #0a192f;
+            --dark-navy: #020c1b;
+            --light-navy: #112240;
+            --accent: #64ffda;
+            --secondary: #ff6b6b;
+            --light: #ccd6f6;
+            --lighter: #e6f1ff;
+            --glass: rgba(10, 25, 47, 0.7);
+            --glass-border: rgba(100, 255, 218, 0.2);
+            --shadow: 0 10px 30px rgba(2, 12, 27, 0.7);
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--dark-navy) 0%, var(--navy) 100%);
+            color: var(--light);
+            min-height: 100vh;
+            overflow-x: hidden;
+            background-attachment: fixed;
+        }
+
+        /* Header & Navigation */
+    header {
+    background: var(--glass);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px); /* For Safari */
+    padding: 1rem 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: var(--shadow);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid var(--glass-border);
+}
+.logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--lighter);
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .logo i {
+            color: var(--secondary);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--light);
+            font-weight: 500;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: var(--transition);
+        }
+
+        nav a:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: var(--transition);
+        }
+
+        nav a:hover:after, nav a.active:after {
+            width: 100%;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.8rem 1.8rem;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            outline: none;
+            font-family: 'Poppins', sans-serif;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: var(--accent);
+            z-index: -1;
+            transition: var(--transition);
+        }
+
+        .btn:hover:before {
+            width: 100%;
+        }
+
+        .btn-primary {
+            background: transparent;
+            color: var(--accent);
+            border: 2px solid var(--accent);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--secondary);
+            border: 2px solid var(--secondary);
+        }
+
+        .btn-primary:hover, .btn-secondary:hover {
+            color: var(--navy);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(100, 255, 218, 0.4);
+        }
+
+        .btn:active {
+            transform: translateY(1px);
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <i class="fas fa-utensils"></i>
+            Street<span>Sustain</span>
+        </div>
+        
+        <nav>
+            <ul>
+                <li><a href="#" class="active">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#dashboard">Dashboard</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+        
+        <div class="auth-buttons">
+            <button class="btn btn-secondary" id="loginBtn" onclick="window.location.href='login.html'">Login</button>
+            <button class="btn btn-primary" id="signupBtn" onclick="window.location.href='signup.html'">Sign Up</button>
+        </div>
+        
+        <div class="mobile-menu-btn">
+            <i class="fas fa-bars"></i>
+        </div>
+    </header>
+
+<div class="bg-gradient-to-br from-primary to-dark min-h-screen flex items-center justify-center p-4">
+    <div class="max-w-4xl w-full flex flex-col md:flex-row shadow-2xl rounded-2xl overflow-hidden">
+        <!-- Left Side - Branding -->
+        <div class="md:w-2/5 bg-gradient-to-br from-primary to-[#112240] text-white p-10 flex flex-col justify-center">
+            <div class="text-center mb-10">
+                <div class="flex items-center justify-center mb-6">
+                    <i class="fas fa-utensils text-4xl text-accent mr-3"></i>
+                    <h1 class="text-3xl font-bold">Street<span class="text-secondary">Sustain</span></h1>
+                </div>
+                <p class="text-light/80">Join India's trusted network for street food sourcing</p>
+            </div>
+            
+            <div class="space-y-4">
+                <div class="flex items-start">
+                    <i class="fas fa-check-circle text-secondary mt-1 mr-3"></i>
+                    <p>Connect with verified suppliers</p>
+                </div>
+                <div class="flex items-start">
+                    <i class="fas fa-check-circle text-secondary mt-1 mr-3"></i>
+                    <p>Get quality ingredients at fair prices</p>
+                </div>
+                <div class="flex items-start">
+                    <i class="fas fa-check-circle text-secondary mt-1 mr-3"></i>
+                    <p>Manage inventory and orders in one place</p>
+                </div>
+            </div>
+            
+            <div class="mt-10 text-center">
+                <p class="text-light/80">Already have an account?</p>
+                <a href="#" class="text-secondary font-semibold hover:underline inline-block mt-2">Sign in now</a>
+            </div>
+        </div>
+        
+        <!-- Right Side - Form -->
+        <div class="md:w-3/5 bg-white p-8 md:p-12">
+            <h2 class="text-3xl font-bold text-primary mb-2">Create Account</h2>
+            <p class="text-gray-600 mb-8">Join thousands of vendors and suppliers across India</p>
+            
+            <form id="signupForm" class="space-y-6">
+                <!-- Name Field -->
+                <div>
+                    <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i class="fas fa-user text-gray-400"></i>
+                        </div>
+                        <input 
+                            type="text" 
+                            id="name" 
+                            name="name" 
+                            required
+                            class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary transition"
+                            placeholder="Enter your full name">
+                    </div>
+                    <p id="name-error" class="mt-1 text-sm text-red-600 hidden">Please enter your name</p>
+                </div>
+                
+                <!-- Email Field -->
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i class="fas fa-envelope text-gray-400"></i>
+                        </div>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email" 
+                            required
+                            class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary transition"
+                            placeholder="Enter your email">
+                    </div>
+                    <p id="email-error" class="mt-1 text-sm text-red-600 hidden">Please enter a valid email address</p>
+                </div>
+                
+                <!-- Password Field -->
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i class="fas fa-lock text-gray-400"></i>
+                        </div>
+                        <input 
+                            type="password" 
+                            id="password" 
+                            name="password" 
+                            required
+                            minlength="6"
+                            class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary transition"
+                            placeholder="Create a password">
+                    </div>
+                    <p id="password-error" class="mt-1 text-sm text-red-600 hidden">Password must be at least 6 characters</p>
+                </div>
+                
+                <!-- Confirm Password Field -->
+                <div>
+                    <label for="confirmPassword" class="block text-sm font-medium text-gray-700 mb-1">Confirm Password</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i class="fas fa-lock text-gray-400"></i>
+                        </div>
+                        <input 
+                            type="password" 
+                            id="confirmPassword" 
+                            name="confirmPassword" 
+                            required
+                            class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary transition"
+                            placeholder="Confirm your password">
+                    </div>
+                    <p id="confirm-error" class="mt-1 text-sm text-red-600 hidden">Passwords do not match</p>
+                </div>
+                
+                <!-- Role Selection -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-3">I am a:</label>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <input 
+                                type="radio" 
+                                id="vendor" 
+                                name="role" 
+                                value="vendor" 
+                                class="hidden peer" 
+                                checked>
+                            <label 
+                                for="vendor" 
+                                class="flex flex-col items-center p-4 border border-gray-300 rounded-lg cursor-pointer peer-checked:border-secondary peer-checked:bg-secondary/10 peer-checked:ring-2 peer-checked:ring-secondary/30 transition">
+                                <i class="fas fa-store text-2xl text-primary mb-2"></i>
+                                <span class="font-medium text-primary">Vendor</span>
+                                <span class="text-sm text-gray-600 mt-1">Street Food Seller</span>
+                            </label>
+                        </div>
+                        
+                        <div>
+                            <input 
+                                type="radio" 
+                                id="supplier" 
+                                name="role" 
+                                value="supplier" 
+                                class="hidden peer">
+                            <label 
+                                for="supplier" 
+                                class="flex flex-col items-center p-4 border border-gray-300 rounded-lg cursor-pointer peer-checked:border-secondary peer-checked:bg-secondary/10 peer-checked:ring-2 peer-checked:ring-secondary/30 transition">
+                                <i class="fas fa-truck text-2xl text-primary mb-2"></i>
+                                <span class="font-medium text-primary">Supplier</span>
+                                <span class="text-sm text-gray-600 mt-1">Ingredient Provider</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Terms and Conditions -->
+                <div class="flex items-start">
+                    <div class="flex items-center h-5">
+                        <input 
+                            id="terms" 
+                            name="terms" 
+                            type="checkbox" 
+                            required
+                            class="w-4 h-4 text-secondary border-gray-300 rounded focus:ring-secondary">
+                    </div>
+                    <div class="ml-3 text-sm">
+                        <label for="terms" class="text-gray-700">
+                            I agree to the <a href="#" class="text-secondary font-medium hover:underline">Terms of Service</a> and <a href="#" class="text-secondary font-medium hover:underline">Privacy Policy</a>
+                        </label>
+                    </div>
+                </div>
+                
+                <!-- Submit Button -->
+                <button 
+                    type="submit" 
+                    id="submitBtn"
+                    class="w-full bg-primary hover:bg-[#09162c] text-white font-semibold py-3 px-4 rounded-lg transition duration-300 flex items-center justify-center">
+                    <span id="btnText">Create Account</span>
+                    <i id="spinner" class="fas fa-spinner fa-spin ml-2 hidden"></i>
+                </button>
+                
+                <!-- Success Message -->
+                <div id="successMessage" class="p-4 bg-green-50 border border-green-200 text-green-700 rounded-lg hidden">
+                    <div class="flex items-center">
+                        <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                        <span>Account created successfully! Redirecting to dashboard...</span>
+                    </div>
+                </div>
+                
+                <!-- Error Message -->
+                <div id="errorMessage" class="p-4 bg-red-50 border border-red-200 text-red-700 rounded-lg hidden">
+                    <div class="flex items-center">
+                        <i class="fas fa-exclamation-circle text-red-500 mr-2"></i>
+                        <span id="errorText">An error occurred. Please try again.</span>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const signupForm = document.getElementById('signupForm');
+            const submitBtn = document.getElementById('submitBtn');
+            const btnText = document.getElementById('btnText');
+            const spinner = document.getElementById('spinner');
+            const successMessage = document.getElementById('successMessage');
+            const errorMessage = document.getElementById('errorMessage');
+            const errorText = document.getElementById('errorText');
+            
+            // Form validation
+            function validateForm() {
+                let isValid = true;
+                
+                // Reset errors
+                document.querySelectorAll('[id$="-error"]').forEach(el => {
+                    el.classList.add('hidden');
+                });
+                
+                // Validate name
+                const name = document.getElementById('name').value.trim();
+                if (!name) {
+                    document.getElementById('name-error').classList.remove('hidden');
+                    isValid = false;
+                }
+                
+                // Validate email
+                const email = document.getElementById('email').value.trim();
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(email)) {
+                    document.getElementById('email-error').classList.remove('hidden');
+                    isValid = false;
+                }
+                
+                // Validate password
+                const password = document.getElementById('password').value;
+                if (password.length < 6) {
+                    document.getElementById('password-error').classList.remove('hidden');
+                    isValid = false;
+                }
+                
+                // Validate confirm password
+                const confirmPassword = document.getElementById('confirmPassword').value;
+                if (password !== confirmPassword) {
+                    document.getElementById('confirm-error').classList.remove('hidden');
+                    isValid = false;
+                }
+                
+                return isValid;
+            }
+            
+            // Form submission
+            signupForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                if (!validateForm()) {
+                    return;
+                }
+                
+                // Show loading state
+                btnText.textContent = 'Creating Account...';
+                spinner.classList.remove('hidden');
+                submitBtn.disabled = true;
+                errorMessage.classList.add('hidden');
+                
+                try {
+                    // Get form values
+                    const formData = {
+                        name: document.getElementById('name').value.trim(),
+                        email: document.getElementById('email').value.trim(),
+                        password: document.getElementById('password').value,
+                        role: document.querySelector('input[name="role"]:checked').value
+                    };
+                    
+                    // Send to backend
+                    const response = await fetch('http://localhost:5000/api/auth/register', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(formData)
+                    });
+                    
+                    const data = await response.json();
+                    
+                    if (response.ok) {
+                        // Show success message
+                        successMessage.classList.remove('hidden');
+                        
+                        // Reset form
+                        signupForm.reset();
+                        
+                        // Redirect after delay
+                        setTimeout(() => {
+                            window.location.href = formData.role === 'vendor' ? 
+                                '/vendor-dashboard.html' : 
+                                '/supplier-dashboard.html';
+                        }, 2000);
+                    } else {
+                        // Show error message
+                        errorText.textContent = data.msg || 'An error occurred during registration';
+                        errorMessage.classList.remove('hidden');
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    errorText.textContent = 'Network error. Please try again later.';
+                    errorMessage.classList.remove('hidden');
+                } finally {
+                    // Reset button state
+                    btnText.textContent = 'Create Account';
+                    spinner.classList.add('hidden');
+                    submitBtn.disabled = false;
+                }
+            });
+            
+            // Real-time password validation
+            document.getElementById('confirmPassword').addEventListener('input', function() {
+                const password = document.getElementById('password').value;
+                const confirmPassword = this.value;
+                
+                if (password && confirmPassword && password !== confirmPassword) {
+                    document.getElementById('confirm-error').classList.remove('hidden');
+                } else {
+                    document.getElementById('confirm-error').classList.add('hidden');
+                }
+            });
+            
+            // Real-time email validation
+            document.getElementById('email').addEventListener('blur', function() {
+                const email = this.value.trim();
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                
+                if (email && !emailRegex.test(email)) {
+                    document.getElementById('email-error').classList.remove('hidden');
+                } else {
+                    document.getElementById('email-error').classList.add('hidden');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StreetSustain | Trusted Sourcing for Indian Street Food</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --navy: #0a192f;
+            --dark-navy: #020c1b;
+            --light-navy: #112240;
+            --accent: #64ffda;
+            --secondary: #ff6b6b;
+            --light: #ccd6f6;
+            --lighter: #e6f1ff;
+            --glass: rgba(10, 25, 47, 0.7);
+            --glass-border: rgba(100, 255, 218, 0.2);
+            --shadow: 0 10px 30px rgba(2, 12, 27, 0.7);
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--dark-navy) 0%, var(--navy) 100%);
+            color: var(--light);
+            min-height: 100vh;
+            overflow-x: hidden;
+            background-attachment: fixed;
+        }
+
+        /* Header & Navigation */
+    header {
+    background: var(--glass);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px); /* For Safari */
+    padding: 1rem 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: var(--shadow);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--lighter);
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .logo i {
+            color: var(--secondary);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--light);
+            font-weight: 500;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: var(--transition);
+        }
+
+        nav a:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: var(--transition);
+        }
+
+        nav a:hover:after, nav a.active:after {
+            width: 100%;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.8rem 1.8rem;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            outline: none;
+            font-family: 'Poppins', sans-serif;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: var(--accent);
+            z-index: -1;
+            transition: var(--transition);
+        }
+
+        .btn:hover:before {
+            width: 100%;
+        }
+
+        .btn-primary {
+            background: transparent;
+            color: var(--accent);
+            border: 2px solid var(--accent);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--secondary);
+            border: 2px solid var(--secondary);
+        }
+
+        .btn-primary:hover, .btn-secondary:hover {
+            color: var(--navy);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(100, 255, 218, 0.4);
+        }
+
+        .btn:active {
+            transform: translateY(1px);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 6rem 5% 4rem;
+            display: flex;
+            align-items: center;
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero:before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(100, 255, 218, 0.1) 0%, transparent 70%);
+            z-index: -1;
+        }
+
+        .hero-content {
+            max-width: 600px;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            color: var(--lighter);
+        }
+
+        .hero h1 span {
+            color: var(--accent);
+            display: block;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: var(--light);
+            opacity: 0.9;
+            line-height: 1.8;
+        }
+
+        .hero-image {
+            position: absolute;
+            right: 5%;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 45%;
+            max-width: 600px;
+            z-index: 1;
+        }
+
+        .hero-image img {
+            width: 100%;
+            animation: float 6s ease-in-out infinite;
+            filter: drop-shadow(0 20px 30px rgba(2, 12, 27, 0.8));
+        }
+
+        .stats {
+            display: flex;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            background: var(--light-navy);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid rgba(100, 255, 218, 0.1);
+            transition: var(--transition);
+            min-width: 140px;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--light);
+            opacity: 0.8;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 6rem 5%;
+            position: relative;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--lighter);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--accent);
+            border-radius: 3px;
+        }
+
+        .section-title p {
+            color: var(--light);
+            opacity: 0.7;
+            max-width: 600px;
+            margin: 1.5rem auto 0;
+            font-size: 1.1rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--light-navy);
+            border-radius: 15px;
+            padding: 2.5rem 2rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            text-align: center;
+            border: 1px solid rgba(100, 255, 218, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: var(--accent);
+            transition: var(--transition);
+        }
+
+        .feature-card:hover:before {
+            width: 100%;
+            opacity: 0.1;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(100, 255, 218, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: var(--accent);
+            font-size: 2rem;
+            transition: var(--transition);
+        }
+
+        .feature-card:hover .feature-icon {
+            background: var(--accent);
+            color: var(--navy);
+            transform: scale(1.1);
+        }
+
+        .feature-card h3 {
+            margin-bottom: 1rem;
+            color: var(--lighter);
+            font-size: 1.4rem;
+        }
+
+        .feature-card p {
+            color: var(--light);
+            opacity: 0.8;
+            line-height: 1.7;
+        }
+
+        /* Dashboard Preview */
+        .dashboard-preview {
+            padding: 6rem 5%;
+            background: linear-gradient(135deg, #020c1b 0%, #0a192f 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+            border-top: 1px solid rgba(100, 255, 218, 0.1);
+            border-bottom: 1px solid rgba(100, 255, 218, 0.1);
+        }
+
+        .dashboard-container {
+            display: flex;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .dashboard-content {
+            flex: 1;
+            z-index: 2;
+        }
+
+        .dashboard-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--lighter);
+        }
+
+        .dashboard-content p {
+            color: var(--light);
+            opacity: 0.8;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .dashboard-image {
+            flex: 1;
+            z-index: 2;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(100, 255, 218, 0.2);
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .dashboard-image-content {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            padding: 2rem;
+            background: var(--dark-navy);
+        }
+
+        .dashboard-image img {
+            width: 100%;
+            display: block;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .tab {
+            background: rgba(100, 255, 218, 0.1);
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: var(--transition);
+            color: var(--light);
+            border: 1px solid transparent;
+        }
+
+        .tab.active, .tab:hover {
+            background: transparent;
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+
+        .features-list {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+
+        .features-list li {
+            margin-bottom: 1rem;
+            padding-left: 2rem;
+            position: relative;
+            color: var(--light);
+        }
+
+        .features-list li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        /* Dashboard Demo Content */
+        .dashboard-demo {
+            display: none;
+            padding: 2rem;
+            background: var(--light-navy);
+            border-radius: 10px;
+            border: 1px solid var(--accent);
+        }
+
+        .dashboard-demo.active {
+            display: block;
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(100, 255, 218, 0.2);
+        }
+
+        .dashboard-title {
+            color: var(--accent);
+            font-size: 1.5rem;
+        }
+
+        .dashboard-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .dashboard-stat {
+            background: rgba(10, 25, 47, 0.5);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid rgba(100, 255, 218, 0.1);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--light);
+            opacity: 0.8;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+        }
+
+        .dashboard-section {
+            background: rgba(10, 25, 47, 0.5);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid rgba(100, 255, 218, 0.1);
+        }
+
+        .section-title {
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            text-align: left;
+        }
+
+        .order-list {
+            list-style: none;
+        }
+
+        .order-item {
+            padding: 1rem;
+            border-bottom: 1px solid rgba(100, 255, 218, 0.1);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .order-item:last-child {
+            border-bottom: none;
+        }
+
+        .order-id {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .order-status {
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .status-pending {
+            background: rgba(255, 107, 107, 0.2);
+            color: var(--secondary);
+        }
+
+        .status-delivered {
+            background: rgba(100, 255, 218, 0.2);
+            color: var(--accent);
+        }
+
+        .status-processing {
+            background: rgba(255, 184, 77, 0.2);
+            color: #ffb84d;
+        }
+
+        .inventory-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid rgba(100, 255, 218, 0.1);
+        }
+
+        .inventory-item:last-child {
+            border-bottom: none;
+        }
+
+        .inventory-name {
+            flex: 1;
+        }
+
+        .inventory-stock {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .inventory-low {
+            color: var(--secondary);
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 6rem 5%;
+            position: relative;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: var(--light-navy);
+            border-radius: 15px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow);
+            position: relative;
+            border: 1px solid rgba(100, 255, 218, 0.1);
+            transition: var(--transition);
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+        }
+
+       .testimonial-card::before {
+    content: "“"; /* Decorative opening quote */
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 5rem;
+    color: var(--accent);
+    opacity: 0.1;
+    font-family: serif;
+    line-height: 1;
+}
+
+
+        .testimonial-content {
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 2;
+            font-style: italic;
+            color: var(--light);
+            line-height: 1.8;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            border-top: 1px solid rgba(100, 255, 218, 0.1);
+            padding-top: 1.5rem;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(100, 255, 218, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .author-info h4 {
+            color: var(--lighter);
+            font-size: 1.1rem;
+        }
+
+        .author-info p {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            color: var(--light);
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 6rem 5%;
+            text-align: center;
+            background: linear-gradient(135deg, #020c1b 0%, #0a192f 100%);
+            color: white;
+            position: relative;
+            border-top: 1px solid rgba(100, 255, 218, 0.1);
+        }
+
+        .cta:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255, 107, 107, 0.1) 0%, transparent 70%);
+            z-index: 1;
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--lighter);
+        }
+
+        .cta p {
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            opacity: 0.8;
+            color: var(--light);
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-navy);
+            color: white;
+            padding: 4rem 5% 2rem;
+            position: relative;
+            border-top: 1px solid rgba(100, 255, 218, 0.1);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+            color: var(--lighter);
+        }
+
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--accent);
+            border-radius: 10px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: rgba(204, 214, 246, 0.7);
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+            transform: translateX(5px);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(100, 255, 218, 0.1);
+            color: var(--accent);
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--accent);
+            color: var(--navy);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(100, 255, 218, 0.1);
+            color: rgba(204, 214, 246, 0.6);
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(100, 255, 218, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(100, 255, 218, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(100, 255, 218, 0); }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        /* Chatbot */
+        .chatbot {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 1000;
+        }
+
+        .chatbot-button {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--accent);
+            color: var(--navy);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 5px 25px rgba(100, 255, 218, 0.5);
+            transition: var(--transition);
+        }
+
+        .chatbot-button:hover {
+            transform: scale(1.1) rotate(10deg);
+            box-shadow: 0 5px 30px rgba(100, 255, 218, 0.8);
+        }
+
+        /* Mobile Navigation */
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--light);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding-top: 4rem;
+            }
+            
+            .hero-content {
+                margin-bottom: 3rem;
+            }
+            
+            .hero-image {
+                position: relative;
+                top: 0;
+                right: 0;
+                transform: none;
+                width: 80%;
+                margin: 0 auto;
+            }
+            
+            .stats {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            .dashboard-container {
+                flex-direction: column;
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .auth-buttons {
+                display: none;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Login Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(2, 12, 27, 0.9);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background: var(--light-navy);
+            width: 90%;
+            max-width: 450px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--glass-border);
+            animation: modalIn 0.4s ease-out;
+        }
+        
+        @keyframes modalIn {
+            0% { transform: translateY(-50px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+        
+        .modal-header {
+            background: var(--navy);
+            padding: 1.5rem;
+            text-align: center;
+            border-bottom: 1px solid var(--glass-border);
+        }
+        
+        .modal-header h3 {
+            color: var(--lighter);
+        }
+        
+        .modal-body {
+            padding: 2rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--light);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border-radius: 4px;
+            border: 1px solid rgba(100, 255, 218, 0.2);
+            background: rgba(10, 25, 47, 0.5);
+            color: var(--light);
+            font-family: 'Poppins', sans-serif;
+            transition: var(--transition);
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(100, 255, 218, 0.1);
+        }
+        
+        .role-selector {
+            display: flex;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .role-btn {
+            flex: 1;
+            padding: 1rem;
+            text-align: center;
+            background: rgba(10, 25, 47, 0.5);
+            border: 1px solid rgba(100, 255, 218, 0.2);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: var(--transition);
+            color: var(--light);
+        }
+        
+        .role-btn.active {
+            background: rgba(100, 255, 218, 0.1);
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            color: var(--light);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .close-modal:hover {
+            color: var(--accent);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <i class="fas fa-utensils"></i>
+            Street<span>Sustain</span>
+        </div>
+        
+        <nav>
+            <ul>
+                <li><a href="#" class="active">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#dashboard">Dashboard</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+        
+        <div class="auth-buttons">
+            <button class="btn btn-secondary" id="loginBtn" onclick="window.location.href='login.html'">Login</button>
+            <button class="btn btn-primary" id="signupBtn" onclick="window.location.href='signup.html'">Sign Up</button>
+        </div>
+        
+        <div class="mobile-menu-btn">
+            <i class="fas fa-bars"></i>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Trusted Sourcing for <span>Indian Street Food</span></h1>
+            <p>Connecting street food vendors with verified suppliers for high-quality, sustainable ingredients. Transparent sourcing, fair prices, and seamless delivery across India.</p>
+            <div class="cta-buttons">
+                <button class="btn btn-primary pulse" id="vendorSignup">Vendor Sign Up <i class="fas fa-store"></i></button>
+                <button class="btn btn-secondary" id="supplierSignup">Supplier Registration <i class="fas fa-truck"></i></button>
+            </div>
+            
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-number" id="vendorCount">0</div>
+                    <div class="stat-label">Vendors</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="supplierCount">0</div>
+                    <div class="stat-label">Suppliers</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="orderCount">0</div>
+                    <div class="stat-label">Orders Daily</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="hero-image">
+            <img src="data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600' viewBox='0 0 800 600'%3E%3Crect fill='%230a192f' width='800' height='600'/%3E%3Cg fill-opacity='0.1'%3E%3Ccircle fill='%2364ffda' cx='100' cy='100' r='80'/%3E%3Ccircle fill='%23ff6b6b' cx='700' cy='150' r='100'/%3E%3Ccircle fill='%23112a60' cx='500' cy='450' r='120'/%3E%3C/g%3E%3Cpath fill='none' stroke='%2364ffda' stroke-width='3' d='M200 300 L600 300' stroke-dasharray='10,10'/%3E%3Ccircle fill='%23020c1b' stroke='%23112a60' stroke-width='2' cx='400' cy='300' r='150'/%3E%3Cg fill='%23ccd6f6'%3E%3Crect x='330' y='220' width='140' height='30' rx='5'/%3E%3Crect x='330' y='270' width='140' height='30' rx='5'/%3E%3Crect x='330' y='320' width='140' height='30' rx='5'/%3E%3Crect x='330' y='370' width='140' height='30' rx='5'/%3E%3Ccircle cx='280' cy='235' r='15' fill='%2364ffda'/%3E%3Ccircle cx='280' cy='285' r='15' fill='%23ff6b6b'/%3E%3Ccircle cx='280' cy='335' r='15' fill='%2364ffda'/%3E%3Ccircle cx='280' cy='385' r='15' fill='%23ff6b6b'/%3E%3C/g%3E%3C/svg%3E" alt="Vendor Dashboard Preview">
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="section-title">
+            <h2>Why Choose StreetSustain</h2>
+            <p>Our platform is designed specifically for the unique needs of Indian street food vendors</p>
+        </div>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h3>Verified Suppliers</h3>
+                <p>All suppliers undergo strict verification for quality and reliability before joining our platform.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-rupee-sign"></i>
+                </div>
+                <h3>Fair Pricing</h3>
+                <p>Transparent pricing models that ensure you get the best value without hidden costs.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-truck"></i>
+                </div>
+                <h3>Reliable Delivery</h3>
+                <p>On-time delivery with temperature-controlled transport for perishable goods.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3>Inventory Management</h3>
+                <p>Smart tools to track inventory, predict demand, and optimize orders.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-file-invoice"></i>
+                </div>
+                <h3>Digital Invoicing</h3>
+                <p>Automatically generated invoices for every transaction with GST compliance.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-headset"></i>
+                </div>
+                <h3>24/7 Support</h3>
+                <p>Dedicated support team and AI chatbot to resolve issues quickly.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Preview -->
+    <section class="dashboard-preview" id="dashboard">
+        <div class="section-title" style="text-align: center;">
+  <h2>Powerful Dashboards</h2>
+  <p>Designed for both vendors and suppliers</p>
+</div>
+
+        
+        <div class="dashboard-container">
+            <div class="dashboard-content">
+                <h2 id="dashboardTitle">Vendor Dashboard</h2>
+                <p>Manage your entire sourcing operation from one intuitive dashboard:</p>
+                
+                <ul class="features-list">
+                    <li>Browse products with smart filtering</li>
+                    <li>Place orders in just a few clicks</li>
+                    <li>Track order status in real-time</li>
+                    <li>View order history and analytics</li>
+                    <li>Receive personalized recommendations</li>
+                    <li>Generate invoices instantly</li>
+                    <li>Chat with suppliers directly</li>
+                </ul>
+                
+                <div class="tabs">
+                    <div class="tab active" data-view="vendor">Vendor View</div>
+                    <div class="tab" data-view="supplier">Supplier View</div>
+                </div>
+                
+                <button class="btn btn-primary" id="viewDemoBtn">View Demo Dashboard</button>
+            </div>
+            
+            <div class="dashboard-image">
+                <div class="dashboard-demo active" id="vendorDemo">
+                    <div class="dashboard-header">
+                        <div class="dashboard-title">Vendor Dashboard</div>
+                        <div class="dashboard-date">Today: <span id="todayDate"></span></div>
+                    </div>
+                    
+                    <div class="dashboard-stats">
+                        <div class="dashboard-stat">
+                            <div class="stat-value">₹24,580</div>
+                            <div class="stat-label">Monthly Spend</div>
+                        </div>
+                        <div class="dashboard-stat">
+                            <div class="stat-value">18</div>
+                            <div class="stat-label">Active Orders</div>
+                        </div>
+                        <div class="dashboard-stat">
+                            <div class="stat-value">96%</div>
+                            <div class="stat-label">On-time Delivery</div>
+                        </div>
+                        <div class="dashboard-stat">
+                            <div class="stat-value">4.8</div>
+                            <div class="stat-label">Avg. Supplier Rating</div>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-grid">
+                        <div class="dashboard-section">
+                            <div class="section-title">Recent Orders</div>
+                            <ul class="order-list">
+                                <li class="order-item">
+                                    <div>
+                                        <div class="order-id">ORDER #SS-2023-0452</div>
+                                        <div>Fresh Vegetables</div>
+                                    </div>
+                                    <div class="order-status status-delivered">Delivered</div>
+                                </li>
+                                <li class="order-item">
+                                    <div>
+                                        <div class="order-id">ORDER #SS-2023-0453</div>
+                                        <div>Spices & Masalas</div>
+                                    </div>
+                                    <div class="order-status status-processing">Processing</div>
+                                </li>
+                                <li class="order-item">
+                                    <div>
+                                        <div class="order-id">ORDER #SS-2023-0454</div>
+                                        <div>Cooking Oil (20L)</div>
+                                    </div>
+                                    <div class="order-status status-pending">Pending</div>
+                                </li>
+                                <li class="order-item">
+                                    <div>
+                                        <div class="order-id">ORDER #SS-2023-0455</div>
+                                        <div>Paneer & Dairy</div>
+                                    </div>
+                                    <div class="order-status status-delivered">Delivered</div>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="dashboard-section">
+                            <div class="section-title">Recommended Suppliers</div>
+                            <div class="supplier-list">
+                                <div class="supplier-item">
+                                    <div class="supplier-name">Fresh Farm Produce</div>
+                                    <div class="supplier-rating">★★★★☆ (4.7)</div>
+                                </div>
+                                <div class="supplier-item">
+                                    <div class="supplier-name">Spice King Traders</div>
+                                    <div class="supplier-rating">★★★★★ (4.9)</div>
+                                </div>
+                                <div class="supplier-item">
+                                    <div class="supplier-name">Organic Dairy Co-op</div>
+                                    <div class="supplier-rating">★★★★☆ (4.6)</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="dashboard-demo" id="supplierDemo">
+                    <div class="dashboard-header">
+                        <div class="dashboard-title">Supplier Dashboard</div>
+                        <div class="dashboard-date">Today: <span id="supplierDate"></span></div>
+                    </div>
+                    
+                    <div class="dashboard-stats">
+                        <div class="dashboard-stat">
+                            <div class="stat-value">₹1,82,450</div>
+                            <div class="stat-label">Monthly Revenue</div>
+                        </div>
+                        <div class="dashboard-stat">
+                            <div class="stat-value">42</div>
+                            <div class="stat-label">Active Orders</div>
+                        </div>
+                        <div class="dashboard-stat">
+                            <div class="stat-value">97%</div>
+                            <div class="stat-label">Order Fulfillment</div>
+                        </div>
+                        <div class="dashboard-stat">
+                            <div class="stat-value">4.9</div>
+                            <div class="stat-label">Avg. Rating</div>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-grid">
+                        <div class="dashboard-section">
+                            <div class="section-title">Inventory Status</div>
+                            <div class="inventory-list">
+                                <div class="inventory-item">
+                                    <div class="inventory-name">Fresh Vegetables</div>
+                                    <div class="inventory-stock">Good</div>
+                                </div>
+                                <div class="inventory-item">
+                                    <div class="inventory-name">Paneer (1kg packs)</div>
+                                    <div class="inventory-stock inventory-low">Low</div>
+                                </div>
+                                <div class="inventory-item">
+                                    <div class="inventory-name">Cooking Oil (20L)</div>
+                                    <div class="inventory-stock">Good</div>
+                                </div>
+                                <div class="inventory-item">
+                                    <div class="inventory-name">Spices & Masalas</div>
+                                    <div class="inventory-stock">Good</div>
+                                </div>
+                                <div class="inventory-item">
+                                    <div class="inventory-name">Wheat Flour (50kg)</div>
+                                    <div class="inventory-stock inventory-low">Low</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="dashboard-section">
+                            <div class="section-title">Pending Orders</div>
+                            <ul class="order-list">
+                                <li class="order-item">
+                                    <div>
+                                        <div class="order-id">ORDER #SS-2023-0456</div>
+                                        <div>Chaat Stall #24</div>
+                                    </div>
+                                    <div class="order-status status-processing">Processing</div>
+                                </li>
+                                <li class="order-item">
+                                    <div>
+                                        <div class="order-id">ORDER #SS-2023-0457</div>
+                                        <div>Vada Pav Corner</div>
+                                    </div>
+                                    <div class="order-status status-processing">Processing</div>
+                                </li>
+                                <li class="order-item">
+                                    <div>
+                                        <div class="order-id">ORDER #SS-2023-0458</div>
+                                        <div>Samosa King</div>
+                                    </div>
+                                    <div class="order-status status-pending">Pending</div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials" id="testimonials">
+        <div class="section-title">
+            <h2>Success Stories</h2>
+            <p>What our vendors and suppliers say about us</p>
+        </div>
+        
+        <div class="testimonial-grid">
+            <div class="testimonial-card">
+                <div class="testimonial-content">
+                    "StreetSustain has transformed my chaat business. I now get fresh ingredients at wholesale prices delivered right to my stall. My customers notice the difference in quality!"
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-avatar">RK</div>
+                    <div class="author-info">
+                        <h4>Rajesh Kumar</h4>
+                        <p>Chaat Stall Owner, Delhi</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="testimonial-card">
+                <div class="testimonial-content">
+                    "As a small organic farm, StreetSustain gave us direct access to hundreds of vendors. Our sales have increased by 70% since joining the platform."
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-avatar">PG</div>
+                    <div class="author-info">
+                        <h4>Priya Gupta</h4>
+                        <p>Organic Farm, Punjab</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="testimonial-card">
+                <div class="testimonial-content">
+                    "The real-time tracking and analytics help me manage inventory perfectly. No more wastage or shortages during peak hours. A game-changer for my vada pav business!"
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-avatar">SM</div>
+                    <div class="author-info">
+                        <h4>Sanjay Mishra</h4>
+                        <p>Vada Pav Stall, Mumbai</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="cta-content">
+            <h2>Ready to Transform Your Business?</h2>
+            <p>Join thousands of street food vendors and suppliers who are already benefiting from our platform</p>
+            <div class="cta-buttons">
+                <button class="btn btn-primary" id="ctaVendor">I'm a Vendor</button>
+                <button class="btn btn-secondary" id="ctaSupplier">I'm a Supplier</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-grid">
+            <div class="footer-column">
+                <h3>StreetSustain</h3>
+                <p>Empowering street food vendors with transparent, reliable sourcing solutions across India.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-column">
+                <h3>For Vendors</h3>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> How It Works</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Pricing</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Vendor Resources</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Success Stories</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>For Suppliers</h3>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Supplier Onboarding</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Quality Standards</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Logistics Support</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Payment Terms</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fas fa-envelope"></i> support@streetsustain.in</a></li>
+                    <li><a href="#"><i class="fas fa-phone"></i> +91 98765 43210</a></li>
+                    <li><a href="#"><i class="fas fa-map-marker-alt"></i> Mumbai, Delhi, Bangalore, Kolkata</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            &copy; 2023 StreetSustain. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- Chatbot -->
+    <div class="chatbot">
+        <div class="chatbot-button">
+            <i class="fas fa-robot"></i>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <div class="close-modal">&times;</div>
+            <div class="modal-header">
+                <h3 id="modalTitle">Login to StreetSustain</h3>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" class="form-control" placeholder="Enter your email">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" class="form-control" placeholder="Enter your password">
+                </div>
+                <div class="role-selector">
+                    <div class="role-btn active">Vendor</div>
+                    <div class="role-btn">Supplier</div>
+                </div>
+                <button class="btn btn-primary" style="width: 100%;">Login</button>
+                <p style="text-align: center; margin-top: 1rem; color: var(--light);">
+                    Don't have an account? <a href="#" style="color: var(--accent);">Sign Up</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Interactive elements
+        document.addEventListener('DOMContentLoaded', function() {
+            // Live counting functionality
+            function animateCounter(element, start, end, duration) {
+                let startTimestamp = null;
+                const step = (timestamp) => {
+                    if (!startTimestamp) startTimestamp = timestamp;
+                    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                    const value = Math.floor(progress * (end - start) + start);
+                    element.textContent = value.toLocaleString();
+                    if (progress < 1) {
+                        window.requestAnimationFrame(step);
+                    }
+                };
+                window.requestAnimationFrame(step);
+            }
+            
+            // Initialize counters
+            const vendorCount = document.getElementById('vendorCount');
+            const supplierCount = document.getElementById('supplierCount');
+            const orderCount = document.getElementById('orderCount');
+            
+            animateCounter(vendorCount, 0, 850, 2000);
+            animateCounter(supplierCount, 0, 120, 1500);
+            animateCounter(orderCount, 0, 245, 1800);
+            
+            // Set today's date
+            const today = new Date();
+            const formattedDate = today.toLocaleDateString('en-IN', {
+                day: '2-digit',
+                month: 'long',
+                year: 'numeric'
+            });
+            
+            document.getElementById('todayDate').textContent = formattedDate;
+            document.getElementById('supplierDate').textContent = formattedDate;
+            
+            // Get form elements
+            const signupForm = document.getElementById('signupForm');
+            const nameInput = document.getElementById('name');
+            const emailInput = document.getElementById('email');
+            const passwordInput = document.getElementById('password');
+            const phoneInput = document.getElementById('phone');
+            const businessNameInput = document.getElementById('businessName');
+            const submitBtn = document.getElementById('submitSignup');
+            const successMessage = document.getElementById('successMessage');
+            
+            let selectedRole = 'vendor'; // Default role
+            
+            // Role selection
+            roleBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    roleBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    selectedRole = this.getAttribute('data-role');
+                });
+            });
+            
+            // Form validation
+            function validateForm() {
+                let isValid = true;
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                const phoneRegex = /^[0-9]{10}$/;
+                
+                // Clear previous errors
+                document.querySelectorAll('.error-message').forEach(el => {
+                    el.style.display = 'none';
+                    el.textContent = '';
+                });
+                
+                // Name validation
+                if (!nameInput.value.trim()) {
+                    document.getElementById('nameError').textContent = 'Name is required';
+                    document.getElementById('nameError').style.display = 'block';
+                    isValid = false;
+                }
+                
+                // Email validation
+                if (!emailInput.value.trim()) {
+                    document.getElementById('emailError').textContent = 'Email is required';
+                    document.getElementById('emailError').style.display = 'block';
+                    isValid = false;
+                } else if (!emailRegex.test(emailInput.value)) {
+                    document.getElementById('emailError').textContent = 'Invalid email format';
+                    document.getElementById('emailError').style.display = 'block';
+                    isValid = false;
+                }
+                
+                // Password validation
+                if (!passwordInput.value) {
+                    document.getElementById('passwordError').textContent = 'Password is required';
+                    document.getElementById('passwordError').style.display = 'block';
+                    isValid = false;
+                } else if (passwordInput.value.length < 6) {
+                    document.getElementById('passwordError').textContent = 'Password must be at least 6 characters';
+                    document.getElementById('passwordError').style.display = 'block';
+                    isValid = false;
+                }
+                
+                // Phone validation
+                if (!phoneInput.value.trim()) {
+                    document.getElementById('phoneError').textContent = 'Phone number is required';
+                    document.getElementById('phoneError').style.display = 'block';
+                    isValid = false;
+                } else if (!phoneRegex.test(phoneInput.value)) {
+                    document.getElementById('phoneError').textContent = 'Invalid phone number (10 digits required)';
+                    document.getElementById('phoneError').style.display = 'block';
+                    isValid = false;
+                }
+                
+                return isValid;
+            }
+            
+            // Handle form submission
+            submitBtn.addEventListener('click', async function() {
+                if (!validateForm()) return;
+                
+                const userData = {
+                    name: nameInput.value.trim(),
+                    email: emailInput.value.trim(),
+                    password: passwordInput.value,
+                    phone: phoneInput.value.trim(),
+                    role: selectedRole,
+                    businessName: businessNameInput.value.trim()
+                };
+                
+                try {
+                    submitBtn.disabled = true;
+                    submitBtn.textContent = 'Creating Account...';
+                    
+                    // Send data to backend
+                    const response = await fetch('http://localhost:5000/api/auth/register', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(userData)
+                    });
+                    
+                    const result = await response.json();
+                    
+                    if (response.ok) {
+                        // Success
+                        successMessage.textContent = 'Account created successfully! Redirecting...';
+                        successMessage.style.display = 'block';
+                        
+                        // Reset form
+                        signupForm.reset();
+                        
+                        // Redirect after delay
+                        setTimeout(() => {
+                            loginModal.style.display = 'none';
+                            // Redirect to dashboard or appropriate page
+                            alert('Account created! You would now be redirected to your dashboard.');
+                        }, 2000);
+                    } else {
+                        // Handle errors from backend
+                        let errorMessage = result.message || 'Signup failed';
+                        
+                        if (result.errors) {
+                            // Handle specific field errors
+                            result.errors.forEach(error => {
+                                const errorElement = document.getElementById(`${error.param}Error`);
+                                if (errorElement) {
+                                    errorElement.textContent = error.msg;
+                                    errorElement.style.display = 'block';
+                                }
+                            });
+                        } else {
+                            // Show general error
+                            successMessage.textContent = errorMessage;
+                            successMessage.style.color = 'var(--secondary)';
+                            successMessage.style.display = 'block';
+                        }
+                    }
+                } catch (error) {
+                    console.error('Signup error:', error);
+                    successMessage.textContent = 'Network error. Please try again.';
+                    successMessage.style.color = 'var(--secondary)';
+                    successMessage.style.display = 'block';
+                } finally {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Create Account';
+                }
+            });
+            
+            // Switch to login form
+            document.getElementById('showLogin').addEventListener('click', function(e) {
+                e.preventDefault();
+                modalTitle.textContent = 'Login to StreetSustain';
+                document.getElementById('signupForm').style.display = 'none';
+                // You would show your login form here
+                alert('Login form would be displayed here');
+            });
+
+            // Modal functionality
+            const loginModal = document.getElementById('loginModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const loginBtn = document.getElementById('loginBtn');
+            const signupBtn = document.getElementById('signupBtn');
+            const closeModal = document.querySelector('.close-modal');
+            const vendorSignup = document.getElementById('vendorSignup');
+            const supplierSignup = document.getElementById('supplierSignup');
+            const ctaVendor = document.getElementById('ctaVendor');
+            const ctaSupplier = document.getElementById('ctaSupplier');
+            
+            // Open login modal
+            loginBtn.addEventListener('click', function() {
+                loginModal.style.display = 'flex';
+                modalTitle.textContent = 'Login to StreetSustain';
+            });
+            
+            // Open signup modal
+            signupBtn.addEventListener('click', function() {
+                loginModal.style.display = 'flex';
+                modalTitle.textContent = 'Create an Account';
+            });
+            
+            vendorSignup.addEventListener('click', function() {
+                loginModal.style.display = 'flex';
+                modalTitle.textContent = 'Vendor Registration';
+            });
+            
+            supplierSignup.addEventListener('click', function() {
+                loginModal.style.display = 'flex';
+                modalTitle.textContent = 'Supplier Registration';
+            });
+            
+            ctaVendor.addEventListener('click', function() {
+                loginModal.style.display = 'flex';
+                modalTitle.textContent = 'Vendor Registration';
+            });
+            
+            ctaSupplier.addEventListener('click', function() {
+                loginModal.style.display = 'flex';
+                modalTitle.textContent = 'Supplier Registration';
+            });
+            
+            // Close modal
+            closeModal.addEventListener('click', function() {
+                loginModal.style.display = 'none';
+            });
+            
+            // Role selection
+            const roleBtns = document.querySelectorAll('.role-btn');
+            roleBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    roleBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+            
+            // Close modal when clicking outside
+            window.addEventListener('click', function(e) {
+                if (e.target === loginModal) {
+                    loginModal.style.display = 'none';
+                }
+            });
+            
+            // Button hover effects
+            const buttons = document.querySelectorAll('.btn');
+            buttons.forEach(button => {
+                button.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-3px)';
+                });
+                
+                button.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+                
+                button.addEventListener('mousedown', function() {
+                    this.style.transform = 'translateY(1px)';
+                });
+                
+                button.addEventListener('mouseup', function() {
+                    this.style.transform = 'translateY(-3px)';
+                });
+            });
+            
+            // Tab switching
+            const tabs = document.querySelectorAll('.tab');
+            const dashboardTitle = document.getElementById('dashboardTitle');
+            const vendorDemo = document.getElementById('vendorDemo');
+            const supplierDemo = document.getElementById('supplierDemo');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Change dashboard content based on selection
+                    const view = this.getAttribute('data-view');
+                    if (view === 'vendor') {
+                        dashboardTitle.textContent = 'Vendor Dashboard';
+                        vendorDemo.classList.add('active');
+                        supplierDemo.classList.remove('active');
+                    } else {
+                        dashboardTitle.textContent = 'Supplier Dashboard';
+                        vendorDemo.classList.remove('active');
+                        supplierDemo.classList.add('active');
+                    }
+                });
+            });
+            
+            // View Demo Button
+            const viewDemoBtn = document.getElementById('viewDemoBtn');
+            viewDemoBtn.addEventListener('click', function() {
+                alert('This would open a full interactive demo dashboard in a new window.\n\nFor now, please explore the dashboard preview above.');
+            });
+            
+            // Chatbot interaction
+            const chatbotBtn = document.querySelector('.chatbot-button');
+            chatbotBtn.addEventListener('click', function() {
+                alert('Welcome to StreetSustain Assistant! How can I help you today?\n\nYou can ask me about:\n- Order status\n- Supplier information\n- Pricing details\n- Account issues');
+            });
+            
+            // Navigation active state
+            const navLinks = document.querySelectorAll('nav a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Scroll to section
+                    const targetId = this.getAttribute('href');
+                    if (targetId !== '#') {
+                        const targetSection = document.querySelector(targetId);
+                        window.scrollTo({
+                            top: targetSection.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Animation on scroll
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+            
+            document.querySelectorAll('.feature-card, .testimonial-card, .stat-item').forEach(card => {
+                card.style.opacity = 0;
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                observer.observe(card);
+            });
+            
+            // Simulate login
+            const loginForm = document.querySelector('.modal-body .btn-primary');
+            loginForm.addEventListener('click', function() {
+                alert('Login functionality would connect to backend\n\nRedirecting to dashboard...');
+                loginModal.style.display = 'none';
+            });
+        });
+    </script>
+</body>
+</html>
