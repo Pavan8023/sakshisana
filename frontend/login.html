@@ -30,97 +30,157 @@
     </script>
     <style>
         :root {
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --navy: #0a192f;
+            --dark-navy: #020c1b;
+            --light-navy: #112240;
+            --accent: #64ffda;
+            --secondary: #ff6b6b;
+            --light: #ccd6f6;
+            --lighter: #e6f1ff;
+            --glass: rgba(10, 25, 47, 0.7);
+            --glass-border: rgba(100, 255, 218, 0.2);
+            --shadow: 0 10px 30px rgba(2, 12, 27, 0.7);
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        
+
         * {
-            transition: var(--transition);
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--dark-navy) 0%, var(--navy) 100%);
+            color: var(--light);
+            min-height: 100vh;
+            overflow-x: hidden;
+            background-attachment: fixed;
         }
-        
-        .order-status {
-            padding: 0.25rem 0.75rem;
-            border-radius: 9999px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            display: inline-block;
-        }
-        
-        .status-delivered {
-            background-color: rgba(100, 255, 218, 0.1);
-            color: #64ffda;
-        }
-        
-        .status-pending {
-            background-color: rgba(255, 107, 107, 0.1);
-            color: #ff6b6b;
-        }
-        
-        .status-processing {
-            background-color: rgba(255, 184, 77, 0.1);
-            color: #ffb84d;
-        }
-        
-        .chart-container {
-            position: relative;
-            height: 200px;
-            width: 100%;
-        }
-        
-        .stat-card {
-            transition: var(--transition);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-        }
-        
-        .stat-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-        
-        .inventory-bar {
-            height: 6px;
-            border-radius: 3px;
-            background: #e5e7eb;
-            overflow: hidden;
-        }
-        
-        .inventory-fill {
-            height: 100%;
-        }
-        
-        .inventory-good {
-            background: #10b981;
-        }
-        
-        .inventory-medium {
-            background: #f59e0b;
-        }
-        
-        .inventory-low {
-            background: #ef4444;
-        }
-        
-        .glass-panel {
-            background: rgba(17, 34, 64, 0.7);
+
+        /* Header & Navigation */
+        header {
+            background: var(--glass);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(100, 255, 218, 0.1);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--glass-border);
         }
-        
-        .toggle-checkbox:checked {
-            right: 0;
-            border-color: #64ffda;
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--lighter);
         }
-        
-        .toggle-checkbox:checked + .toggle-label {
-            background: #64ffda;
+
+        .logo span {
+            color: var(--accent);
         }
-        
+
+        .logo i {
+            color: var(--secondary);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--light);
+            font-weight: 500;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: var(--transition);
+        }
+
+        nav a:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: var(--transition);
+        }
+
+        nav a:hover:after, nav a.active:after {
+            width: 100%;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.8rem 1.8rem;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            outline: none;
+            font-family: 'Poppins', sans-serif;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: var(--accent);
+            z-index: -1;
+            transition: var(--transition);
+        }
+
+        .btn:hover:before {
+            width: 100%;
+        }
+
+        .btn-primary {
+            background: transparent;
+            color: var(--accent);
+            border: 2px solid var(--accent);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--secondary);
+            border: 2px solid var(--secondary);
+        }
+
+        .btn-primary:hover, .btn-secondary:hover {
+            color: var(--navy);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(100, 255, 218, 0.4);
+        }
+
+        .btn:active {
+            transform: translateY(1px);
+        }
+
         /* Animation for login panel */
         @keyframes float {
             0% { transform: translateY(0px); }
@@ -133,9 +193,36 @@
         }
     </style>
 </head>
-<body class="bg-gradient-to-br from-primary to-dark min-h-screen flex items-center justify-center p-4 transition-colors" id="body">
+<body id="body" class="justify-center items-center min-h-screen">
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <i class="fas fa-utensils"></i>
+            Street<span>Sustain</span>
+        </div>
+        
+        <nav>
+            <ul>
+                <li><a href="#" class="active">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#dashboard">Dashboard</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+        
+        <div class="auth-buttons">
+            <button class="btn btn-secondary" id="loginBtn">Login</button>
+            <button class="btn btn-primary" id="signupBtn" onclick="window.location.href='signup.html'">Sign Up</button>
+        </div>
+        
+        <div class="mobile-menu-btn">
+            <i class="fas fa-bars"></i>
+        </div>
+    </header>
+
     <!-- Login Page -->
-    <div class="max-w-4xl w-full flex flex-col md:flex-row shadow-2xl rounded-2xl overflow-hidden glass-panel" id="loginPage">
+    <div style="margin-left: 300px;" class="max-w-4xl w-full flex flex-col md:flex-row shadow-2xl rounded-2xl overflow-hidden glass-panel" id="loginPage">
         <!-- Left Side - Branding -->
         <div class="md:w-2/5 bg-gradient-to-br from-primary to-primary-light text-white p-10 flex flex-col justify-center relative overflow-hidden">
             <!-- Animated background elements -->
@@ -168,7 +255,7 @@
             
             <div class="mt-10 text-center relative z-10">
                 <p class="text-light/80">Don't have an account?</p>
-                <a href="#" class="text-secondary font-semibold hover:underline inline-block mt-2">Sign up now</a>
+                <a href="signup.html" class="text-secondary font-semibold hover:underline inline-block mt-2">Sign up now</a>
             </div>
         </div>
         
@@ -309,365 +396,8 @@
         </div>
     </div>
 
-    <!-- Dashboard Page -->
-    <div class="w-full hidden" id="dashboardPage">
-        <!-- Header -->
-        <header class="bg-gradient-to-r from-primary to-primary-light text-white p-4 shadow-lg">
-            <div class="container mx-auto flex justify-between items-center">
-                <div class="flex items-center">
-                    <i class="fas fa-utensils text-2xl text-accent mr-3"></i>
-                    <h1 class="text-2xl font-bold">Street<span class="text-secondary">Sustain</span></h1>
-                </div>
-                <div class="flex items-center space-x-6">
-                    <div class="relative group">
-                        <i class="fas fa-bell text-xl cursor-pointer"></i>
-                        <span class="absolute -top-1 -right-1 bg-accent text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">3</span>
-                        <div class="absolute right-0 mt-2 w-80 bg-white dark:bg-gray-800 shadow-xl rounded-lg p-4 hidden group-hover:block z-10 border border-gray-200 dark:border-gray-700">
-                            <h3 class="font-bold text-primary dark:text-white mb-2">Notifications</h3>
-                            <ul>
-                                <li class="py-2 border-b border-gray-200 dark:border-gray-700">
-                                    <div class="flex">
-                                        <div class="w-8 h-8 rounded-full bg-secondary/20 flex items-center justify-center mr-3">
-                                            <i class="fas fa-truck text-secondary"></i>
-                                        </div>
-                                        <div>
-                                            <p class="text-sm font-medium text-gray-800 dark:text-white">Order #SS-2023-0456 shipped</p>
-                                            <p class="text-xs text-gray-500 dark:text-gray-400">10 minutes ago</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="py-2 border-b border-gray-200 dark:border-gray-700">
-                                    <div class="flex">
-                                        <div class="w-8 h-8 rounded-full bg-green-100 dark:bg-green-900/50 flex items-center justify-center mr-3">
-                                            <i class="fas fa-check text-green-600 dark:text-green-400"></i>
-                                        </div>
-                                        <div>
-                                            <p class="text-sm font-medium text-gray-800 dark:text-white">Payment received</p>
-                                            <p class="text-xs text-gray-500 dark:text-gray-400">2 hours ago</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="py-2">
-                                    <div class="flex">
-                                        <div class="w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900/50 flex items-center justify-center mr-3">
-                                            <i class="fas fa-user-plus text-blue-600 dark:text-blue-400"></i>
-                                        </div>
-                                        <div>
-                                            <p class="text-sm font-medium text-gray-800 dark:text-white">New supplier registered</p>
-                                            <p class="text-xs text-gray-500 dark:text-gray-400">5 hours ago</p>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="flex items-center space-x-2 cursor-pointer group">
-                        <div class="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center">
-                            <i class="fas fa-user text-secondary"></i>
-                        </div>
-                        <span>Rajesh Kumar</span>
-                        <div class="absolute mt-40 right-4 w-48 bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden hidden group-hover:block z-10 border border-gray-200 dark:border-gray-700">
-                            <div class="p-4 border-b border-gray-200 dark:border-gray-700">
-                                <p class="font-medium text-gray-800 dark:text-white">Rajesh Kumar</p>
-                                <p class="text-sm text-gray-600 dark:text-gray-400">rajesh@streetsustain.in</p>
-                            </div>
-                            <ul>
-                                <li class="hover:bg-gray-100 dark:hover:bg-gray-700 py-2 px-4"><i class="fas fa-user mr-2 text-gray-600 dark:text-gray-400"></i> Profile</li>
-                                <li class="hover:bg-gray-100 dark:hover:bg-gray-700 py-2 px-4"><i class="fas fa-cog mr-2 text-gray-600 dark:text-gray-400"></i> Settings</li>
-                                <li class="hover:bg-gray-100 dark:hover:bg-gray-700 py-2 px-4"><i class="fas fa-question-circle mr-2 text-gray-600 dark:text-gray-400"></i> Help</li>
-                            </ul>
-                            <button id="logoutBtn" class="w-full text-left hover:bg-gray-100 dark:hover:bg-gray-700 py-2 px-4 text-red-600 dark:text-red-400">
-                                <i class="fas fa-sign-out-alt mr-2"></i> Logout
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </header>
-        
-        <!-- Main Content -->
-        <main class="container mx-auto p-4">
-            <!-- Dashboard Header -->
-            <div class="mb-8 flex justify-between items-center">
-                <div>
-                    <h1 class="text-3xl font-bold text-primary dark:text-white">Dashboard</h1>
-                    <p class="text-gray-600 dark:text-gray-300">Welcome back, Rajesh! Here's your business overview</p>
-                </div>
-                <div>
-                    <span class="bg-secondary/10 text-secondary px-3 py-1 rounded-full text-sm">Vendor Account</span>
-                </div>
-            </div>
-            
-            <!-- Stats Cards -->
-            <div class="dashboard-grid mb-8">
-                <div class="stat-card bg-white dark:bg-gray-800 rounded-xl shadow p-6">
-                    <div class="flex items-center">
-                        <div class="p-3 bg-green-100 dark:bg-green-900/30 rounded-lg mr-4">
-                            <i class="fas fa-rupee-sign text-green-600 dark:text-green-400 text-2xl"></i>
-                        </div>
-                        <div>
-                            <p class="text-gray-600 dark:text-gray-300">Today's Revenue</p>
-                            <h3 class="text-2xl font-bold text-gray-800 dark:text-white">₹8,560</h3>
-                        </div>
-                    </div>
-                    <div class="mt-4 pt-4 border-t border-gray-100 dark:border-gray-700">
-                        <p class="text-green-600 dark:text-green-400 flex items-center">
-                            <i class="fas fa-arrow-up mr-1"></i> 12.5% from yesterday
-                        </p>
-                    </div>
-                </div>
-                
-                <div class="stat-card bg-white dark:bg-gray-800 rounded-xl shadow p-6">
-                    <div class="flex items-center">
-                        <div class="p-3 bg-blue-100 dark:bg-blue-900/30 rounded-lg mr-4">
-                            <i class="fas fa-shopping-cart text-blue-600 dark:text-blue-400 text-2xl"></i>
-                        </div>
-                        <div>
-                            <p class="text-gray-600 dark:text-gray-300">Total Orders</p>
-                            <h3 class="text-2xl font-bold text-gray-800 dark:text-white">42</h3>
-                        </div>
-                    </div>
-                    <div class="mt-4 pt-4 border-t border-gray-100 dark:border-gray-700">
-                        <p class="text-green-600 dark:text-green-400 flex items-center">
-                            <i class="fas fa-arrow-up mr-1"></i> 3 new orders today
-                        </p>
-                    </div>
-                </div>
-                
-                <div class="stat-card bg-white dark:bg-gray-800 rounded-xl shadow p-6">
-                    <div class="flex items-center">
-                        <div class="p-3 bg-purple-100 dark:bg-purple-900/30 rounded-lg mr-4">
-                            <i class="fas fa-users text-purple-600 dark:text-purple-400 text-2xl"></i>
-                        </div>
-                        <div>
-                            <p class="text-gray-600 dark:text-gray-300">New Customers</p>
-                            <h3 class="text-2xl font-bold text-gray-800 dark:text-white">18</h3>
-                        </div>
-                    </div>
-                    <div class="mt-4 pt-4 border-t border-gray-100 dark:border-gray-700">
-                        <p class="text-green-600 dark:text-green-400 flex items-center">
-                            <i class="fas fa-arrow-up mr-1"></i> 5.2% from last week
-                        </p>
-                    </div>
-                </div>
-                
-                <div class="stat-card bg-white dark:bg-gray-800 rounded-xl shadow p-6">
-                    <div class="flex items-center">
-                        <div class="p-3 bg-yellow-100 dark:bg-yellow-900/30 rounded-lg mr-4">
-                            <i class="fas fa-percentage text-yellow-600 dark:text-yellow-400 text-2xl"></i>
-                        </div>
-                        <div>
-                            <p class="text-gray-600 dark:text-gray-300">Order Completion</p>
-                            <h3 class="text-2xl font-bold text-gray-800 dark:text-white">96%</h3>
-                        </div>
-                    </div>
-                    <div class="mt-4 pt-4 border-t border-gray-100 dark:border-gray-700">
-                        <p class="text-green-600 dark:text-green-400 flex items-center">
-                            <i class="fas fa-check-circle mr-1"></i> On track
-                        </p>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Charts and Tables Section -->
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-                <!-- Revenue Chart -->
-                <div class="bg-white dark:bg-gray-800 rounded-xl shadow p-6">
-                    <div class="flex justify-between items-center mb-6">
-                        <h2 class="text-xl font-bold text-gray-800 dark:text-white">Revenue Overview</h2>
-                        <select class="border border-gray-300 dark:border-gray-700 rounded-lg px-3 py-1 bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
-                            <option>Last 7 Days</option>
-                            <option>Last 30 Days</option>
-                            <option>Last 90 Days</option>
-                        </select>
-                    </div>
-                    <div class="chart-container">
-                        <canvas id="revenueChart"></canvas>
-                    </div>
-                </div>
-                
-                <!-- Recent Orders -->
-                <div class="bg-white dark:bg-gray-800 rounded-xl shadow p-6">
-                    <div class="flex justify-between items-center mb-6">
-                        <h2 class="text-xl font-bold text-gray-800 dark:text-white">Recent Orders</h2>
-                        <a href="#" class="text-secondary font-medium">View All</a>
-                    </div>
-                    <div class="overflow-x-auto">
-                        <table class="w-full">
-                            <thead>
-                                <tr class="text-left text-gray-600 dark:text-gray-300 border-b border-gray-200 dark:border-gray-700">
-                                    <th class="pb-3">Order ID</th>
-                                    <th class="pb-3">Customer</th>
-                                    <th class="pb-3">Amount</th>
-                                    <th class="pb-3">Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700">
-                                    <td class="py-3 text-gray-800 dark:text-white">#SS-2023-0452</td>
-                                    <td class="py-3 text-gray-800 dark:text-white">Rahul Sharma</td>
-                                    <td class="py-3 text-gray-800 dark:text-white">₹1,240</td>
-                                    <td class="py-3">
-                                        <span class="order-status status-delivered">Delivered</span>
-                                    </td>
-                                </tr>
-                                <tr class="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700">
-                                    <td class="py-3 text-gray-800 dark:text-white">#SS-2023-0453</td>
-                                    <td class="py-3 text-gray-800 dark:text-white">Priya Patel</td>
-                                    <td class="py-3 text-gray-800 dark:text-white">₹850</td>
-                                    <td class="py-3">
-                                        <span class="order-status status-processing">Processing</span>
-                                    </td>
-                                </tr>
-                                <tr class="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700">
-                                    <td class="py-3 text-gray-800 dark:text-white">#SS-2023-0454</td>
-                                    <td class="py-3 text-gray-800 dark:text-white">Vikram Singh</td>
-                                    <td class="py-3 text-gray-800 dark:text-white">₹2,150</td>
-                                    <td class="py-3">
-                                        <span class="order-status status-pending">Pending</span>
-                                    </td>
-                                </tr>
-                                <tr class="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700">
-                                    <td class="py-3 text-gray-800 dark:text-white">#SS-2023-0455</td>
-                                    <td class="py-3 text-gray-800 dark:text-white">Anjali Mehta</td>
-                                    <td class="py-3 text-gray-800 dark:text-white">₹980</td>
-                                    <td class="py-3">
-                                        <span class="order-status status-delivered">Delivered</span>
-                                    </td>
-                                </tr>
-                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
-                                    <td class="py-3 text-gray-800 dark:text-white">#SS-2023-0456</td>
-                                    <td class="py-3 text-gray-800 dark:text-white">Sanjay Verma</td>
-                                    <td class="py-3 text-gray-800 dark:text-white">₹1,560</td>
-                                    <td class="py-3">
-                                        <span class="order-status status-processing">Processing</span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Inventory Section -->
-            <div class="bg-white dark:bg-gray-800 rounded-xl shadow p-6 mb-8">
-                <div class="flex justify-between items-center mb-6">
-                    <h2 class="text-xl font-bold text-gray-800 dark:text-white">Inventory Summary</h2>
-                    <a href="#" class="text-secondary font-medium">Manage Inventory</a>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                    <div class="border border-gray-200 dark:border-gray-700 rounded-lg p-4 hover:shadow-md transition bg-white dark:bg-gray-700">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="font-medium text-gray-800 dark:text-white">Fresh Vegetables</h3>
-                                <p class="text-gray-600 dark:text-gray-300 text-sm">Stock: 125 kg</p>
-                            </div>
-                            <div class="w-10 h-10 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center">
-                                <i class="fas fa-leaf text-green-600 dark:text-green-400"></i>
-                            </div>
-                        </div>
-                        <div class="mt-4">
-                            <div class="inventory-bar">
-                                <div class="inventory-fill inventory-good" style="width: 75%"></div>
-                            </div>
-                            <p class="text-xs text-gray-600 dark:text-gray-400 mt-1">Good stock level</p>
-                        </div>
-                    </div>
-                    
-                    <div class="border border-gray-200 dark:border-gray-700 rounded-lg p-4 hover:shadow-md transition bg-white dark:bg-gray-700">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="font-medium text-gray-800 dark:text-white">Paneer</h3>
-                                <p class="text-gray-600 dark:text-gray-300 text-sm">Stock: 8 kg</p>
-                            </div>
-                            <div class="w-10 h-10 rounded-full bg-yellow-100 dark:bg-yellow-900/30 flex items-center justify-center">
-                                <i class="fas fa-cheese text-yellow-600 dark:text-yellow-400"></i>
-                            </div>
-                        </div>
-                        <div class="mt-4">
-                            <div class="inventory-bar">
-                                <div class="inventory-fill inventory-medium" style="width: 30%"></div>
-                            </div>
-                            <p class="text-xs text-gray-600 dark:text-gray-400 mt-1">Reorder needed</p>
-                        </div>
-                    </div>
-                    
-                    <div class="border border-gray-200 dark:border-gray-700 rounded-lg p-4 hover:shadow-md transition bg-white dark:bg-gray-700">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="font-medium text-gray-800 dark:text-white">Spices</h3>
-                                <p class="text-gray-600 dark:text-gray-300 text-sm">Stock: 42 packets</p>
-                            </div>
-                            <div class="w-10 h-10 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center">
-                                <i class="fas fa-mortar-pestle text-green-600 dark:text-green-400"></i>
-                            </div>
-                        </div>
-                        <div class="mt-4">
-                            <div class="inventory-bar">
-                                <div class="inventory-fill inventory-good" style="width: 65%"></div>
-                            </div>
-                            <p class="text-xs text-gray-600 dark:text-gray-400 mt-1">Adequate stock</p>
-                        </div>
-                    </div>
-                    
-                    <div class="border border-gray-200 dark:border-gray-700 rounded-lg p-4 hover:shadow-md transition bg-white dark:bg-gray-700">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="font-medium text-gray-800 dark:text-white">Cooking Oil</h3>
-                                <p class="text-gray-600 dark:text-gray-300 text-sm">Stock: 56 liters</p>
-                            </div>
-                            <div class="w-10 h-10 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center">
-                                <i class="fas fa-oil-can text-red-600 dark:text-red-400"></i>
-                            </div>
-                        </div>
-                        <div class="mt-4">
-                            <div class="inventory-bar">
-                                <div class="inventory-fill inventory-low" style="width: 25%"></div>
-                            </div>
-                            <p class="text-xs text-gray-600 dark:text-gray-400 mt-1">Low stock - order now</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Quick Actions -->
-            <div class="bg-gradient-to-r from-primary to-primary-light rounded-xl p-6 text-white">
-                <h2 class="text-xl font-bold mb-4">Quick Actions</h2>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    <button class="bg-secondary/20 hover:bg-secondary/30 text-white py-3 rounded-lg flex flex-col items-center transition">
-                        <i class="fas fa-plus-circle text-2xl mb-2"></i>
-                        <span>New Order</span>
-                    </button>
-                    <button class="bg-secondary/20 hover:bg-secondary/30 text-white py-3 rounded-lg flex flex-col items-center transition">
-                        <i class="fas fa-truck text-2xl mb-2"></i>
-                        <span>Track Delivery</span>
-                    </button>
-                    <button class="bg-secondary/20 hover:bg-secondary/30 text-white py-3 rounded-lg flex flex-col items-center transition">
-                        <i class="fas fa-file-invoice text-2xl mb-2"></i>
-                        <span>Generate Invoice</span>
-                    </button>
-                    <button class="bg-secondary/20 hover:bg-secondary/30 text-white py-3 rounded-lg flex flex-col items-center transition">
-                        <i class="fas fa-chart-line text-2xl mb-2"></i>
-                        <span>View Reports</span>
-                    </button>
-                </div>
-            </div>
-        </main>
-        
-        <!-- Footer -->
-        <footer class="bg-primary text-white py-6 mt-8">
-            <div class="container mx-auto text-center">
-                <p>© 2023 StreetSustain. All rights reserved.</p>
-                <p class="text-light/60 mt-2">Empowering street food vendors with transparent sourcing solutions</p>
-            </div>
-        </footer>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const loginPage = document.getElementById('loginPage');
-            const dashboardPage = document.getElementById('dashboardPage');
             const loginForm = document.getElementById('loginForm');
             const loginSubmitBtn = document.getElementById('loginSubmitBtn');
             const loginBtnText = document.getElementById('loginBtnText');
@@ -675,17 +405,12 @@
             const loginSuccessMessage = document.getElementById('loginSuccessMessage');
             const loginErrorMessage = document.getElementById('loginErrorMessage');
             const loginErrorText = document.getElementById('loginErrorText');
-            const logoutBtn = document.getElementById('logoutBtn');
-            const body = document.getElementById('body');
             const darkModeToggle = document.getElementById('darkModeToggle');
             const togglePassword = document.getElementById('togglePassword');
             const passwordInput = document.getElementById('login-password');
             
-            // Check if user is already logged in
-            if (localStorage.getItem('isLoggedIn') === 'true') {
-                showDashboard();
-            }
-            
+            const API_BASE_URL = 'https://sakshisana.onrender.com';
+
             // Dark mode toggle
             darkModeToggle.addEventListener('change', function() {
                 if (this.checked) {
@@ -760,16 +485,25 @@
                 const role = document.querySelector('input[name="role"]:checked').value;
                 const remember = document.getElementById('remember').checked;
                 
-                // In a real app, this would be your API call
                 try {
-                    // Simulate API call delay
-                    await new Promise(resolve => setTimeout(resolve, 1500));
-                    
-                    // For demo purposes, accept any credentials
-                    // In a real app, you would validate credentials with your backend
-                    if (email && password) {
+                    const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ email, password, role })
+                    });
+
+                    const data = await response.json();
+
+                    if (response.ok) {
                         // Show success message
                         loginSuccessMessage.classList.remove('hidden');
+                        
+                        // Store token and user data
+                        localStorage.setItem('authToken', data.token);
+                        localStorage.setItem('userRole', role);
+                        localStorage.setItem('userEmail', email);
                         
                         // Save login state
                         localStorage.setItem('isLoggedIn', 'true');
@@ -777,15 +511,15 @@
                             localStorage.setItem('rememberMe', 'true');
                         }
                         
-                        // Simulate redirect to dashboard
+                        // Redirect to dashboard
                         setTimeout(() => {
-                            showDashboard();
+                            window.location.href = 'dashboard.html';
                         }, 1500);
                     } else {
-                        throw new Error('Invalid credentials');
+                        throw new Error(data.msg || 'Invalid credentials');
                     }
                 } catch (error) {
-                    loginErrorText.textContent = error.message || 'Invalid credentials. Please try again.';
+                    loginErrorText.textContent = error.message || 'An error occurred. Please try again.';
                     loginErrorMessage.classList.remove('hidden');
                 } finally {
                     // Reset button state
@@ -794,85 +528,6 @@
                     loginSubmitBtn.disabled = false;
                 }
             });
-            
-            // Logout functionality
-            logoutBtn.addEventListener('click', function() {
-                localStorage.removeItem('isLoggedIn');
-                localStorage.removeItem('rememberMe');
-                loginPage.classList.remove('hidden');
-                dashboardPage.classList.add('hidden');
-                body.classList.remove('bg-gray-100');
-                body.classList.add('bg-gradient-to-br', 'from-primary', 'to-dark');
-                
-                // Reset form
-                loginForm.reset();
-                loginSuccessMessage.classList.add('hidden');
-            });
-            
-            // Show dashboard function
-            function showDashboard() {
-                loginPage.classList.add('hidden');
-                dashboardPage.classList.remove('hidden');
-                body.classList.remove('bg-gradient-to-br', 'from-primary', 'to-dark');
-                body.classList.add('bg-gray-100', 'dark:bg-gray-900');
-                
-                // Initialize charts
-                initCharts();
-            }
-            
-            // Initialize charts
-            function initCharts() {
-                // Revenue Chart
-                const revenueCtx = document.getElementById('revenueChart').getContext('2d');
-                const revenueChart = new Chart(revenueCtx, {
-                    type: 'line',
-                    data: {
-                        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-                        datasets: [{
-                            label: 'Daily Revenue (₹)',
-                            data: [6500, 7200, 8100, 7800, 8560, 9200, 10500],
-                            borderColor: '#64ffda',
-                            backgroundColor: 'rgba(100, 255, 218, 0.1)',
-                            borderWidth: 3,
-                            pointBackgroundColor: '#64ffda',
-                            pointRadius: 5,
-                            tension: 0.3,
-                            fill: true
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        scales: {
-                            y: {
-                                beginAtZero: true,
-                                grid: {
-                                    color: 'rgba(0, 0, 0, 0.05)'
-                                },
-                                ticks: {
-                                    callback: function(value) {
-                                        return '₹' + value;
-                                    },
-                                    color: document.documentElement.classList.contains('dark') ? '#e5e7eb' : '#4b5563'
-                                }
-                            },
-                            x: {
-                                grid: {
-                                    display: false
-                                },
-                                ticks: {
-                                    color: document.documentElement.classList.contains('dark') ? '#e5e7eb' : '#4b5563'
-                                }
-                            }
-                        },
-                        plugins: {
-                            legend: {
-                                display: false
-                            }
-                        }
-                    }
-                });
-            }
         });
     </script>
 </body>
